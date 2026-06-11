@@ -1,15 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>FILE UPLOAD SYSTEM</title>
-    </head>
-    <body>
-        <h2>Upload File</h2>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <button type="submit">
-                Upload
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 File Upload Manager</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Space Background -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <h1> 📁 File Upload Manager</h1>
+
+        <form action="/upload"
+            method="POST"
+            enctype="multipart/form-data">
+
+            <label for="file-upload" class="choose-btn">
+                📁 Choose File
+            </label>
+
+            <input
+                id="file-upload"
+                type="file"
+                name="file"
+                required>
+
+            <button class="upload-btn" type="submit">
+                🚀 Upload
             </button>
+
         </form>
-    </body>
+
+        <h2>📂 Uploaded Files</h2>
+
+        {% if files %}
+
+            {% for file in files %}
+
+            <div class="file-card">
+
+                <div class="file-name">
+                    📄 {{ file }}
+                </div>
+
+                <div class="actions">
+
+                    <a href="/download/{{ file }}">
+                        <button
+                            type="button"
+                            class="download-btn">
+                            ⬇ Download
+                        </button>
+                    </a>
+
+                    <a href="/delete/{{ file }}">
+                        <button
+                            type="button"
+                            class="delete-btn">
+                            🗑 Delete
+                        </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-card">
+                No files uploaded yet.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("file-upload");
+        const label = document.querySelector(".choose-btn");
+
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files.length > 0) {
+                label.textContent =
+                    "📄 " + fileInput.files[0].name;
+            }
+        });
+    </script>
+
+</body>
+
 </html>
