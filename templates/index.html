@@ -17,30 +17,44 @@
     <div class="stars2"></div>
     <div class="stars3"></div>
 
+    <!-- Shooting Stars -->
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
 
-    <!-- Main Container -->
     <div class="container">
 
-        <h1> 📁 File Upload Manager</h1>
+        <h1>📁 File Upload Manager</h1>
 
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message-box">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Upload Form -->
         <form action="/upload"
-            method="POST"
-            enctype="multipart/form-data">
+              method="POST"
+              enctype="multipart/form-data">
 
             <label for="file-upload" class="choose-btn">
                 📁 Choose File
             </label>
 
             <input
-                id="file-upload"
                 type="file"
+                id="file-upload"
                 name="file"
                 required>
 
-            <button class="upload-btn" type="submit">
+            <button
+                type="submit"
+                class="upload-btn">
                 🚀 Upload
             </button>
 
@@ -93,15 +107,24 @@
     </div>
 
     <script>
-        const fileInput = document.getElementById("file-upload");
-        const label = document.querySelector(".choose-btn");
+
+        const fileInput =
+            document.getElementById("file-upload");
+
+        const chooseButton =
+            document.querySelector(".choose-btn");
 
         fileInput.addEventListener("change", () => {
-            if (fileInput.files.length > 0) {
-                label.textContent =
-                    "📄 " + fileInput.files[0].name;
+
+            if(fileInput.files.length > 0){
+
+                chooseButton.textContent =
+                    "📄 " +
+                    fileInput.files[0].name;
             }
+
         });
+
     </script>
 
 </body>
