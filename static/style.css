@@ -143,7 +143,7 @@ body{
 }
 
 /* ==========================
-   MAIN CARD
+    MAIN CARD
 ========================== */
 
 .container{
@@ -201,31 +201,34 @@ h2{
 }
 
 /* ==========================
-   FLASH MESSAGE
+    FLASH MESSAGE
 ========================== */
 
 .message-box{
-
-    background:
-    rgba(255,255,255,0.15);
-
+    background: rgba(255,255,255,0.15);
     color:white;
-
     padding:15px;
-
     border-radius:10px;
-
     text-align:center;
-
     font-weight:bold;
-
     margin-bottom:20px;
-
-    border:
-    1px solid rgba(255,255,255,0.2);
+    border:1px solid rgba(255,255,255,0.2);
 
     animation:
-    slideDown 0.4s ease;
+        slideDown 0.4s ease,
+        fadeOut 0.5s ease 3s forwards;
+}
+
+@keyframes fadeOut{
+
+    from{
+        opacity:1;
+    }
+
+    to{
+        opacity:0;
+        transform:translateY(-10px);
+    }
 }
 
 @keyframes slideDown{
@@ -243,7 +246,7 @@ h2{
 }
 
 /* ==========================
-   FORM
+    FORM
 ========================== */
 
 form{
@@ -330,7 +333,7 @@ input[type="file"]{
 }
 
 /* ==========================
-   FILE CARD
+    FILE CARD
 ========================== */
 
 .file-card{

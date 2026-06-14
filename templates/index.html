@@ -7,7 +7,7 @@
     <title>🚀 File Upload Manager</title>
 
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+        href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
@@ -39,8 +39,8 @@
 
         <!-- Upload Form -->
         <form action="/upload"
-              method="POST"
-              enctype="multipart/form-data">
+            method="POST"
+            enctype="multipart/form-data">
 
             <label for="file-upload" class="choose-btn">
                 📁 Choose File
@@ -69,7 +69,22 @@
             <div class="file-card">
 
                 <div class="file-name">
-                    📄 {{ file }}
+                        {% if file.name.endswith('.pdf') %}
+                            📄
+                        {% elif file.name.endswith('.jpg')
+                            or file.name.endswith('.jpeg')
+                            or file.name.endswith('.png') %}
+                            🖼️
+                        {% else %}
+                            📁
+                        {% endif %}
+                        {{ file.name }}
+
+                    <br>
+                    <small>
+                        Uploaded:
+                        {{file.time}}
+                    </small>
                 </div>
 
                 <div class="actions">
@@ -82,8 +97,7 @@
                         </button>
                     </a>
 
-                    <a href="/delete/{{ file }}">
-                        <button
+                    <a href="/delete/{{ file.name }}">                        <button
                             type="button"
                             class="delete-btn">
                             🗑 Delete
